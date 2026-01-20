@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% set title = "Admin — H&H Detailing" %}
+{% block content %}
+  <div class="formWrap">
+    <div class="formHead">
+      <h2>Admin login</h2>
+    </div>
+    <div class="formBody">
+      <form method="post" action="{{ url_for('admin') }}">
+        <div class="field">
+          <label for="password">Wachtwoord</label>
+          <input id="password" name="password" type="password" placeholder="••••••••" required>
+        </div>
+        <div style="margin-top:12px;">
+          <button class="btn primary" type="submit">Inloggen</button>
+        </div>
+        <div class="note" style="margin-top:10px;">
+          Tip: zet je eigen admin wachtwoord via <code>ADMIN_PASSWORD</code> in je hosting.
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
