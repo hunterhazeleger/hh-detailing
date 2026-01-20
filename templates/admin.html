@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% set title = "Admin — H&H Detailing" %}
+{% block content %}
+  <div class="formWrap">
+    <div class="formHead">
+      <h2>Admin</h2>
+      <form method="post" action="{{ url_for('admin_logout') }}">
+        <button class="btn" type="submit">Uitloggen</button>
+      </form>
+    </div>
+    <div class="formBody">
+      <div class="sectionTitle" style="margin-top:0;">Datum blokkeren</div>
+      <form method="post" action="{{ url_for('admin_block') }}" class="grid" style="align-items:end;">
+        <div class="field">
+          <label>Datum</label>
+          <input name="date" type="date" required>
+        </div>
+        <div class="field">
+          <label>Reden (optioneel)</label>
+          <input name="reason" placeholder="bijv. vakantie">
+        </div>
+        <div>
+          <button class="btn primary" type="submit">Blokkeren</button>
+        </div>
+      </form>
+
+      <div class="sectionTitle">Geblokkeerde datums</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Reden</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if blocked|length == 0 %}
+            <tr><td colspan="3" style="color:var(--muted);">Geen geblokkeerde datums.</td></tr>
+          {% endif %}
+          {% for b in blocked %}
+            <tr>
+              <td>{{ b["date"] }}</td>
+              <td style="color:var(--muted);">{{ b["reason"] or "" }}</td>
+              <td>
+                <form method="post" action="{{ url_for('admin_unblock') }}">
+                  <input type="hidden" name="date" value="{{ b['date'] }}">
+                  <button class="smallBtn" type="submit">Vrijgeven</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="sectionTitle">Reserveringen</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Tijd</th>
+            <th>Klant</th>
+            <th>Pakket</th>
+            <th>Telefoon</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if bookings|length == 0 %}
+            <tr><td colspan="6" style="color:var(--muted);">Nog geen reserveringen.</td></tr>
+          {% endif %}
+          {% for r in bookings %}
+            <tr>
+              <td>{{ r["date"] }}</td>
+              <td>{{ r["time"] }}</td>
+              <td>{{ r["customer_name"] }}</td>
+              <td style="color:var(--muted);">{{ r["service_type"] }} / {{ r["package_code"] }}</td>
+              <td>{{ r["phone"] }}</td>
+              <td>
+                <form method="post" action="{{ url_for('admin_delete_booking') }}" onsubmit="return confirm('Reservering verwijderen?');">
+                  <input type="hidden" name="id" value="{{ r['id'] }}">
+                  <button class="smallBtn" type="submit">Verwijderen</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="note" style="margin-top:12px;">
+        Elk tijdslot kan maar één keer geboekt worden.
+      </div>
+    </div>
+  </div>
+{% endblock %}

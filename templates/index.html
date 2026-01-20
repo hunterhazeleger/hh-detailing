@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% set title = "H&H Detailing — Afspraak plannen" %}
+{% block content %}
+  <div class="hero">
+    <div class="inner">
+      <div>
+        <h1 class="h1">H&H <span class="accent">Detailing</span></h1>
+        <p class="sub">
+          Plan je afspraak in een paar stappen. Kies je pakket, datum en tijd. Zodra je boekt is het tijdslot direct gereserveerd.
+        </p>
+
+        <div class="pills">
+          <div class="pill">Op locatie</div>
+          <div class="pill">Water & elektra nodig</div>
+          <div class="pill">Ophaalservice (€10–€50)</div>
+        </div>
+
+        <a class="btn primary" href="{{ url_for('book') }}">Afspraak plannen</a>
+        <a class="btn" href="#pakketten" style="margin-left:8px;">Pakketten bekijken</a>
+
+        <div class="sectionTitle" id="pakketten">Detailing pakketten</div>
+        <div class="cardGrid">
+          <div class="card">
+            <h3>Basic <span class="price">€50</span></h3>
+            <p>Exterieur handwassen · Interieur stofzuigen</p>
+          </div>
+          <div class="card">
+            <h3>Deluxe <span class="price">€100</span></h3>
+            <p>Exterieur handwassen · Wielkasten/velgen · Bandenbescherming · Interieur stofzuigen · Matten · Bekleding & vakjes · Kunststof · Ramen</p>
+          </div>
+          <div class="card">
+            <h3>Premium <span class="price">€200</span></h3>
+            <p>Deluxe + prewash · Kunststof behandeling · Autoparfum · Hondenharen verwijderen · Diepte reiniging (vakjes, kunststof & vloermatten)</p>
+          </div>
+        </div>
+
+        <div class="sectionTitle" style="margin-top:22px;">Polijst services</div>
+        <div class="cardGrid">
+          <div class="card">
+            <h3>Stage 1 <span class="price">€300</span></h3>
+            <p>One step polish · ±60–70% waskrassen verwijderd · Lakbescherming (±3 maanden)</p>
+          </div>
+          <div class="card">
+            <h3>Stage 2 <span class="price">v.a. €450</span></h3>
+            <p>Two step polish · ±80–90% waskrassen verwijderd · Lakbescherming (±6 maanden)</p>
+          </div>
+          <div class="card">
+            <h3>Stage 3 <span class="price">v.a. €650</span></h3>
+            <p>Polish + keramische coating · Bescherming tegen vuil & UV · Langdurige glans (6–12 maanden)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="heroImg">
+        <img src="{{ url_for('static', filename='img/hero.png') }}" alt="H&H Detailing">
+        <div class="overlay"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

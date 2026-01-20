@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% set title = "Reservering gelukt — H&H Detailing" %}
+{% block content %}
+  <div class="formWrap">
+    <div class="formHead">
+      <h2>Reservering gelukt</h2>
+      <a class="btn primary" href="{{ url_for('book') }}">Nieuwe afspraak</a>
+    </div>
+    <div class="formBody">
+      <p style="margin:0 0 10px; color: var(--muted);">
+        Bedankt {{ customer_name }}. Je afspraak staat gepland op <strong>{{ date }}</strong> om <strong>{{ time }}</strong>.
+      </p>
+      <div class="card">
+        <h3 style="margin:0 0 8px;">Samenvatting</h3>
+        <p style="margin:0; color: var(--muted); line-height:1.55;">
+          Service: <strong>{{ "Detailing" if service_type == "detailing" else "Polijsten" }}</strong><br>
+          Pakket: <strong>{{ package_code }}</strong><br>
+          Datum: <strong>{{ date }}</strong><br>
+          Tijd: <strong>{{ time }}</strong>
+        </p>
+      </div>
+      <div class="note" style="margin-top:12px;">
+        Wil je iets aanpassen? Bel of app: <strong>06 24353575</strong>.
+      </div>
+    </div>
+  </div>
+{% endblock %}

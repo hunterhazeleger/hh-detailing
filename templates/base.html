@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or "H&H Detailing" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta name="theme-color" content="#0b111d">
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="H&H Detailing logo">
+        <div class="name">H&H Detailing</div>
+      </a>
+      <div class="links">
+        <a class="btn" href="{{ url_for('home') }}">Home</a>
+        <a class="btn primary" href="{{ url_for('book') }}">Afspraak plannen</a>
+        <a class="btn" href="{{ url_for('admin') }}">Admin</a>
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+    <div class="footer">
+      <div class="badge">
+        <span class="kicker">Contact</span>
+        <strong>06 24353575</strong>
+      </div>
+      <div class="badge">
+        <span class="kicker">Info</span>
+        <span>Op locatie · Water & elektra nodig · Ophaalservice (€10–€50)</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
