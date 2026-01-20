@@ -74,8 +74,11 @@ def slot_taken(date_str: str, time_str: str) -> bool:
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("home.html")
 
+@app.route("/pakketten")
+def pakketten():
+    return render_template("pakketten.html")
 
 @app.route("/boeken")
 def book():
